@@ -26,6 +26,17 @@ namespace elibrary.Controllers
             
             ViewBag.Wydawnictwa = GetWydawnictwo;
         }
+        public void PopulateWydawnictwoList2()
+        {
+            IEnumerable<SelectListItem> GetBiblioteka =
+                _context.Biblioteki.Select(i => new SelectListItem
+                {
+                    Text = i.NameBib,
+                    Value = i.Id.ToString()
+                });
+
+            ViewBag.Biblioteki = GetBiblioteka;
+        }
 
         public IActionResult Index()
         {
@@ -39,6 +50,7 @@ namespace elibrary.Controllers
         public IActionResult Create()
         {
             PopulateWydawnictwoList();
+            PopulateWydawnictwoList2();
             return View();
         }
 

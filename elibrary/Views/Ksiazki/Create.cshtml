@@ -49,9 +49,11 @@
                         <span asp-validation-for="Wydawnictwa.NameWyd" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Biblioteki.NameBib" class="conrol-label"></label>
-                        <input asp-for="Id" class="form-control" />
-                        <span asp-validation-for="BibId" class="text-danger"></span>
+                        <label asp-for="Biblioteki" class="conrol-label">Biblioteka</label>
+                        <select asp-for="Id" asp-items="@ViewBag.Biblioteki" class="form-select">
+                            <option disabled selected>---wybierz bibliotekę---</option>
+                        </select>
+                        <span asp-validation-for="Biblioteki.NameBib" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">

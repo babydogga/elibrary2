@@ -1,4 +1,5 @@
 ﻿using elibrary.Data;
+using elibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,17 +7,37 @@ namespace elibrary.Controllers
 {
     public class WydawnictwaController : Controller
     {
-        private readonly AppDbContext _context;
+        private AppDbContext _context;
 
         public WydawnictwaController(AppDbContext context)
         {
             _context = context;
         }
-
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var allWydawnictwa = await _context.Wydawnictwa.ToListAsync();
-            return View(allWydawnictwa);
+            var data = _context.Wydawnictwa.ToList();
+
+            return View(data);
         }
+
+        //Get: Wydawnictwa/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Wydawnictwo objWydawnictwo)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Wydawnictwa.Add(objWydawnictwo);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
     }
 }

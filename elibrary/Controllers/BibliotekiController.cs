@@ -1,4 +1,5 @@
 ﻿using elibrary.Data;
+using elibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,17 +7,37 @@ namespace elibrary.Controllers
 {
     public class BibliotekiController : Controller
     {
-        private readonly AppDbContext _context;
+        private AppDbContext _context;
 
         public BibliotekiController(AppDbContext context)
         {
             _context = context;
         }
-
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var allBiblioteki = await _context.Biblioteki.ToListAsync();
-            return View(allBiblioteki);
+            var data = _context.Biblioteki.ToList();
+
+            return View(data);
         }
+
+        //Get: Biblioteki/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Biblioteka objBiblioteka)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Biblioteki.Add(objBiblioteka);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
     }
 }

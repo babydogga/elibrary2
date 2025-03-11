@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace elibrary.Models
 {
@@ -14,6 +15,7 @@ namespace elibrary.Models
         public string DescWyd { get; set; }
 
         //Relacje
+        [ValidateNever]
         public List<Ksiazka> Ksiazki { get; set; }    
     }
 }

@@ -1,6 +1,7 @@
 ﻿using elibrary.Data;
 using elibrary.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace elibrary.Controllers
@@ -14,6 +15,18 @@ namespace elibrary.Controllers
             _context = context;
         }
 
+        public void PopulateWydawnictwoList()
+        {
+            IEnumerable<SelectListItem> GetWydawnictwo =
+                _context.Wydawnictwa.Select(i => new SelectListItem
+                {
+                    Text = i.NameWyd,
+                    Value = i.Id.ToString()
+                });
+            
+            ViewBag.Wydawnictwa = GetWydawnictwo;
+        }
+
         public IActionResult Index()
         {
             var allKsiazki =  _context.Ksiazki
@@ -25,6 +38,7 @@ namespace elibrary.Controllers
         //Get: Wydawnictwa/Create
         public IActionResult Create()
         {
+            PopulateWydawnictwoList();
             return View();
         }
 

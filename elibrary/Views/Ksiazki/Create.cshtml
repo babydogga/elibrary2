@@ -17,7 +17,7 @@
                         <img id="ProfilePicturePreview" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ImageURL" class="conrol-label"></label>
+                        <label asp-for="ImageURL" class="conrol-label">Okładka Książki</label>
                         <input asp-for="ImageURL" class="form-control" />
                         <span asp-validation-for="ImageURL" class="text-danger"></span>
                     </div>
@@ -42,14 +42,16 @@
                         <span asp-validation-for="ksiazkaCategory" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Wydawnictwa" class="conrol-label"></label>
-                        <input asp-for="Wydawnictwa" class="form-control" />
-                        <span asp-validation-for="Wydawnictwa" class="text-danger"></span>
+                        <label asp-for="Wydawnictwa" class="conrol-label">Wydawnictwo</label>
+                        <select asp-for="Id" asp-items="@ViewBag.Wydawnictwa" class="form-select">
+                            <option disabled selected>---wybierz wydawnictwo---</option>
+                            </select>
+                        <span asp-validation-for="Wydawnictwa.NameWyd" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Biblioteki" class="conrol-label"></label>
-                        <input asp-for="Biblioteki" class="form-control" />
-                        <span asp-validation-for="Biblioteki" class="text-danger"></span>
+                        <label asp-for="Biblioteki.NameBib" class="conrol-label"></label>
+                        <input asp-for="Id" class="form-control" />
+                        <span asp-validation-for="BibId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">

@@ -16,23 +16,23 @@
                     <div class="form-group text-center">
                         <img id="ProfilePicturePreview" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label asp-for="LogoBib" class="conrol-label"></label>
                         <input asp-for="LogoBib" class="form-control" />
                         <span asp-validation-for="LogoBib" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label asp-for="NameBib" class="conrol-label"></label>
                         <input asp-for="NameBib" class="form-control" />
                         <span asp-validation-for="NameBib" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label asp-for="DescBib" class="conrol-label"></label>
                         <input asp-for="DescBib" class="form-control" />
                         <span asp-validation-for="DescBib" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="d-flex justify-content-between">
                         <input type="submit" value="Create" class="btn btn-primary" />
                         <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
                     </div>

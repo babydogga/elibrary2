@@ -1,4 +1,5 @@
 ﻿using elibrary.Data;
+using elibrary.Data.Enums;
 using elibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,7 +24,7 @@ namespace elibrary.Controllers
                     Text = i.NameWyd,
                     Value = i.Id.ToString()
                 });
-            
+
             ViewBag.Wydawnictwa = GetWydawnictwo;
         }
         public void PopulateWydawnictwoList2()
@@ -38,9 +39,23 @@ namespace elibrary.Controllers
             ViewBag.Biblioteki = GetBiblioteka;
         }
 
+        public void PopulateWydawnictwoList3()
+        {
+            IEnumerable<SelectListItem> ksiazkaCategories =
+                Enum.GetValues(typeof(KsiazkaCategory))
+        .Cast<KsiazkaCategory>().Select(e => new SelectListItem
+        {
+            Text = e.ToString(),
+            Value = ((int)e).ToString()
+        });
+
+            ViewBag.KsiazkaCategories = ksiazkaCategories;
+        }
+
+
         public IActionResult Index()
         {
-            var allKsiazki =  _context.Ksiazki
+            var allKsiazki = _context.Ksiazki
                 .Include(n => n.Biblioteki)
                 .Include(n => n.Wydawnictwa)
                 .OrderBy(n => n.NameKs).ToList();
@@ -51,6 +66,7 @@ namespace elibrary.Controllers
         {
             PopulateWydawnictwoList();
             PopulateWydawnictwoList2();
+            PopulateWydawnictwoList3();
             return View();
         }
 

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Biblioteka>
+@{
+    ViewData["Title"] = "Lista Bibliotek";
+}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <th>@Html.DisplayNameFor(model => model.LogoBib)</th>
+                    <th>@Html.DisplayNameFor(model => model.NameBib)</th>
+                    <th>@Html.DisplayNameFor(model => model.DescBib) </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        
+                        <td class="align-middle">
+                            <a href="@item.LogoBib" target="_blank">
+                                <img class="rounded-circle border border-secondary"
+                                     src="@item.LogoBib"
+                                     alt="@item.NameBib"
+                                     style="width: 150px; height: 150px; object-fit: contain; background-color: white;">
+                            </a>
+                        </td>
+
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.NameBib)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.DescBib)
+                        </td>
+                        <td class="align-middle">
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
+                                <a class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> Details</a>
+                                <a class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Delete</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<div style="position: fixed; right: 25px; bottom: 25px;" class="text-white">
+    <a asp-controller="Biblioteki" asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Add New
+    </a>
+</div>

@@ -1,0 +1,80 @@
+﻿@model Ksiazka
+
+@{
+    ViewData["Title"] = "Dodaj nową książkę";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Dodaj nową książkę</h1>
+        </p>
+        <div class="row">
+            <div class="col-md offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group text-center">
+                        <img id="ProfilePicturePreview" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ImageURL" class="conrol-label"></label>
+                        <input asp-for="ImageURL" class="form-control" />
+                        <span asp-validation-for="ImageURL" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NameKs" class="conrol-label"></label>
+                        <input asp-for="NameKs" class="form-control" />
+                        <span asp-validation-for="NameKs" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DescKs" class="conrol-label"></label>
+                        <input asp-for="DescKs" class="form-control" />
+                        <span asp-validation-for="DescKs" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PublikacjaTime" class="conrol-label"></label>
+                        <input asp-for="PublikacjaTime" class="form-control" />
+                        <span asp-validation-for="PublikacjaTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ksiazkaCategory" class="conrol-label"></label>
+                        <input asp-for="ksiazkaCategory" class="form-control" />
+                        <span asp-validation-for="ksiazkaCategory" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Wydawnictwa" class="conrol-label"></label>
+                        <input asp-for="Wydawnictwa" class="form-control" />
+                        <span asp-validation-for="Wydawnictwa" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Biblioteki" class="conrol-label"></label>
+                        <input asp-for="Biblioteki" class="form-control" />
+                        <span asp-validation-for="Biblioteki" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            var profilePictureURL = $("#ImageURL").val(); // Pobranie wartości poprawnie
+            if (profilePictureURL) {
+                output.src = profilePictureURL;
+            }
+        });
+
+        $("#ImageURL").on("input", function () { // Użycie "input" zamiast "change" dla lepszej reakcji
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        });
+    </script>
+}

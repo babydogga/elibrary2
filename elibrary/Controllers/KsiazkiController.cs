@@ -1,4 +1,5 @@
 ﻿using elibrary.Data;
+using elibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +14,31 @@ namespace elibrary.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var allKsiazki = await _context.Ksiazki.Include(n => n.Biblioteki).OrderBy(n => n.NameKs).ToListAsync();
+            var allKsiazki =  _context.Ksiazki
+                .Include(n => n.Biblioteki)
+                .Include(n => n.Wydawnictwa)
+                .OrderBy(n => n.NameKs).ToList();
             return View(allKsiazki);
+        }
+        //Get: Wydawnictwa/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Ksiazka objKsiazka)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Ksiazki.Add(objKsiazka);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }

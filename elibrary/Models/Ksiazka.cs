@@ -1,4 +1,5 @@
 ﻿using elibrary.Data.Enums;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,11 +21,13 @@ namespace elibrary.Models
         //wydawnictwo
         public int WydId { get; set; }
         [ForeignKey("WydId")]
+        [ValidateNever]
         public Wydawnictwo Wydawnictwa { get; set; }    
         //autor
 
         public int BibId { get; set; }
         [ForeignKey("BibId")]
+        [ValidateNever]
         public Biblioteka Biblioteki  { get; set; }    
 
 

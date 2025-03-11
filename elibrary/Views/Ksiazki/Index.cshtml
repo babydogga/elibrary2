@@ -25,9 +25,10 @@
                     <div class="col-md-6">
                         <div class="card-body">
                             <p class="card-text">@item.DescKs</p>
-                            <p class="card-text"><b>Cinema: </b>@item.Biblioteki.NameBib</p>
-                            <p class="card-text"><b>Category: </b>@item.ksiazkaCategory</p>
-                            <p class="card-text"><b>Start Date: </b>@item.PublikacjaTime.ToString("dd MMM yy")</p>
+                            <p class="card-text"><b>Biblioteka: </b>@item.Biblioteki.NameBib</p>
+                            <p class="card-text"><b>Wydawnictwo: </b>@item.Wydawnictwa.NameWyd</p>
+                            <p class="card-text"><b>Kategoria: </b>@item.ksiazkaCategory</p>
+                            <p class="card-text"><b>Publikacja: </b>@item.PublikacjaTime.ToString("dd MMM yy")</p>
                             <p class="card-text ">
                                 <b>Status: </b>
                                 @if(DateTime.Now >= @item.PublikacjaTime)

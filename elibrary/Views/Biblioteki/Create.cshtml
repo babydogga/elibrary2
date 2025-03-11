@@ -1,13 +1,13 @@
-﻿@model Autor
+﻿@model Biblioteka
 
 @{
-    ViewData["Title"] = "Dodaj nowego autora";
+    ViewData["Title"] = "Dodaj nową bibliotekę";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Dodaj nowego autora</h1>
+            <h1>Dodaj nową bibliotekę</h1>
         </p>
         <div class="row">
             <div class="col-md offset-2">
@@ -17,19 +17,19 @@
                         <img id="ProfilePicturePreview" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ProfilePictureURL" class="conrol-label"></label>
-                        <input asp-for="ProfilePictureURL" class="form-control" />
-                        <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                        <label asp-for="LogoBib" class="conrol-label"></label>
+                        <input asp-for="LogoBib" class="form-control" />
+                        <span asp-validation-for="LogoBib" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="FullName" class="conrol-label"></label>
-                        <input asp-for="FullName" class="form-control" />
-                        <span asp-validation-for="FullName" class="text-danger"></span>
+                        <label asp-for="NameBib" class="conrol-label"></label>
+                        <input asp-for="NameBib" class="form-control" />
+                        <span asp-validation-for="NameBib" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Bio" class="conrol-label"></label>
-                        <input asp-for="Bio" class="form-control" />
-                        <span asp-validation-for="Bio" class="text-danger"></span>
+                        <label asp-for="DescBib" class="conrol-label"></label>
+                        <input asp-for="DescBib" class="form-control" />
+                        <span asp-validation-for="DescBib" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
@@ -46,13 +46,13 @@
     <script>
         $(document).ready(function () {
             var output = document.getElementById('ProfilePicturePreview');
-            var profilePictureURL = $("#ProfilePictureURL").val(); // Pobranie wartości poprawnie
+            var profilePictureURL = $("#LogoBib").val(); // Pobranie wartości poprawnie
             if (profilePictureURL) {
                 output.src = profilePictureURL;
             }
         });
 
-        $("#ProfilePictureURL").on("input", function () { // Użycie "input" zamiast "change" dla lepszej reakcji
+        $("#LogoBib").on("input", function () { // Użycie "input" zamiast "change" dla lepszej reakcji
             var output = document.getElementById('ProfilePicturePreview');
             output.src = $(this).val();
         });

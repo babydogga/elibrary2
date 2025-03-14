@@ -16,18 +16,19 @@ namespace elibrary.Models
         public KsiazkaCategory ksiazkaCategory { get; set; }
 
         //relacje
-       
-        public List<Autor_Ksiazka> Autor_Ksiazki { get; set; } 
+        public List<Autor_Ksiazka> Autor_Ksiazki { get; set; }
         //wydawnictwo
+
+        [ValidateNever]
         public int WydId { get; set; }
         [ForeignKey("WydId")]
-        [ValidateNever]
-        public Wydawnictwo Wydawnictwa { get; set; }    
+        
+        public Wydawnictwo Wydawnictwa { get; set; }
         //autor
 
+        [ValidateNever]
         public int BibId { get; set; }
         [ForeignKey("BibId")]
-        [ValidateNever]
         public Biblioteka Biblioteki  { get; set; }    
 
 

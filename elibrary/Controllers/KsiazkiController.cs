@@ -70,6 +70,7 @@ namespace elibrary.Controllers
             return View();
         }
 
+        //Get: Wydawnictwa/Create
         [HttpPost]
         public IActionResult Create(Ksiazka objKsiazka)
         {
@@ -80,7 +81,7 @@ namespace elibrary.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View();
+            return View(objKsiazka);
         }
     }
 }

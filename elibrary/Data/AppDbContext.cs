@@ -25,5 +25,5 @@ namespace elibrary.Data
     public DbSet<Ksiazka> Ksiazki { get; set; }
     public DbSet<Wydawnictwo> Wydawnictwa { get; set; }
     public DbSet<Autor_Ksiazka> Autor_Ksiazki { get; set; }
-    }
+     }
 }

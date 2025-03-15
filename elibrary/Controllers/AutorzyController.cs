@@ -89,13 +89,11 @@ namespace elibrary.Controllers
 
         // POST: Autorzy/Delete
         [HttpPost]
-
         public IActionResult Delete(Autor model)
         {
             try
-
             {
-                var autor = _context.Autorzy.Find(x => x.Id == model.Id);
+                var autor = _context.Autorzy.FirstOrDefault(x => x.Id == model.Id);
                 if (autor != null)
                 {
                     _context.Autorzy.Remove(autor);
@@ -114,7 +112,6 @@ namespace elibrary.Controllers
                 TempData["errorMessage"] = ex.Message;
                 return View();
             }
-
         }
     }
 }

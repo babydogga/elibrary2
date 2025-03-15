@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using elibrary.Data;
 
@@ -11,9 +12,11 @@ using elibrary.Data;
 namespace elibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250311232917_new11")]
+    partial class new11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +49,21 @@ namespace elibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Autorzy");
+                });
+
+            modelBuilder.Entity("elibrary.Models.Autor_Ksiazka", b =>
+                {
+                    b.Property<int>("KsiazkaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AutorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("KsiazkaId", "AutorId");
+
+                    b.HasIndex("AutorId");
+
+                    b.ToTable("Autor_Ksiazki");
                 });
 
             modelBuilder.Entity("elibrary.Models.Biblioteka", b =>
@@ -81,9 +99,6 @@ namespace elibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AutId")
-                        .HasColumnType("int");
-
                     b.Property<int>("BibId")
                         .HasColumnType("int");
 
@@ -109,8 +124,6 @@ namespace elibrary.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AutId");
 
                     b.HasIndex("BibId");
 
@@ -144,14 +157,27 @@ namespace elibrary.Migrations
                     b.ToTable("Wydawnictwa");
                 });
 
-            modelBuilder.Entity("elibrary.Models.Ksiazka", b =>
+            modelBuilder.Entity("elibrary.Models.Autor_Ksiazka", b =>
                 {
                     b.HasOne("elibrary.Models.Autor", "Autorzy")
-                        .WithMany("Ksiazki")
-                        .HasForeignKey("AutId")
+                        .WithMany("Autor_Ksiazki")
+                        .HasForeignKey("AutorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("elibrary.Models.Ksiazka", "Ksiazki")
+                        .WithMany("Autor_Ksiazki")
+                        .HasForeignKey("KsiazkaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Autorzy");
+
+                    b.Navigation("Ksiazki");
+                });
+
+            modelBuilder.Entity("elibrary.Models.Ksiazka", b =>
+                {
                     b.HasOne("elibrary.Models.Biblioteka", "Biblioteki")
                         .WithMany("Ksiazki")
                         .HasForeignKey("BibId")
@@ -164,8 +190,6 @@ namespace elibrary.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Autorzy");
-
                     b.Navigation("Biblioteki");
 
                     b.Navigation("Wydawnictwa");
@@ -173,12 +197,17 @@ namespace elibrary.Migrations
 
             modelBuilder.Entity("elibrary.Models.Autor", b =>
                 {
-                    b.Navigation("Ksiazki");
+                    b.Navigation("Autor_Ksiazki");
                 });
 
             modelBuilder.Entity("elibrary.Models.Biblioteka", b =>
                 {
                     b.Navigation("Ksiazki");
+                });
+
+            modelBuilder.Entity("elibrary.Models.Ksiazka", b =>
+                {
+                    b.Navigation("Autor_Ksiazki");
                 });
 
             modelBuilder.Entity("elibrary.Models.Wydawnictwo", b =>

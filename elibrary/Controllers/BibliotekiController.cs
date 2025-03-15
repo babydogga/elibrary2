@@ -1,4 +1,5 @@
 ﻿using elibrary.Data;
+using elibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,17 +7,98 @@ namespace elibrary.Controllers
 {
     public class BibliotekiController : Controller
     {
-        private readonly AppDbContext _context;
+        private AppDbContext _context;
 
         public BibliotekiController(AppDbContext context)
         {
             _context = context;
         }
-
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var allBiblioteki = await _context.Biblioteki.ToListAsync();
-            return View(allBiblioteki);
+            var data = _context.Biblioteki.ToList();
+
+            return View(data);
         }
+
+        //Get: Biblioteki/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Biblioteka objBiblioteka)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Biblioteki.Add(objBiblioteka);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+        // GET: Autorzy/Delete
+
+        [HttpGet]
+        public IActionResult Delete(int Id)
+        {
+            try
+            {
+                var biblioteka = _context.Biblioteki.Find(Id);
+                if (biblioteka != null)
+                {
+                    var bibliotekaView = new Biblioteka()
+                    {
+                        Id = biblioteka.Id,
+                        LogoBib = biblioteka.LogoBib,
+                        NameBib = biblioteka.NameBib,
+                        DescBib = biblioteka.DescBib
+
+                    };
+                    return View(bibliotekaView);
+                }
+                else
+                {
+                    TempData["errorMessage"] = $"Autor details not available for the Id: {Id}";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+        // POST: Autorzy/Delete
+        [HttpPost]
+
+        public IActionResult Delete(Biblioteka model)
+        {
+            try
+
+            {
+                var biblioteka = _context.Biblioteki.Find(model.Id);
+                if (biblioteka != null)
+                {
+                    _context.Biblioteki.Remove(biblioteka);
+                    _context.SaveChanges();
+                    TempData["successMessage"] = "Autor został usunięty!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["errorMessage"] = $"Autor details not available for the Id: {model.Id}";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+
+        }
+
     }
 }

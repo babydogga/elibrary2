@@ -1,5 +1,8 @@
 ﻿using elibrary.Data;
+using elibrary.Data.Enums;
+using elibrary.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace elibrary.Controllers
@@ -13,10 +16,72 @@ namespace elibrary.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public void PopulateWydawnictwoList()
         {
-            var allKsiazki = await _context.Ksiazki.Include(n => n.Biblioteki).OrderBy(n => n.NameKs).ToListAsync();
+            IEnumerable<SelectListItem> GetWydawnictwo =
+                _context.Wydawnictwa.Select(i => new SelectListItem
+                {
+                    Text = i.NameWyd,
+                    Value = i.Id.ToString()
+                });
+
+            ViewBag.Wydawnictwa = GetWydawnictwo;
+        }
+        public void PopulateWydawnictwoList2()
+        {
+            IEnumerable<SelectListItem> GetBiblioteka =
+                _context.Biblioteki.Select(i => new SelectListItem
+                {
+                    Text = i.NameBib,
+                    Value = i.Id.ToString()
+                });
+
+            ViewBag.Biblioteki = GetBiblioteka;
+        }
+
+        public void PopulateWydawnictwoList3()
+        {
+            IEnumerable<SelectListItem> ksiazkaCategories =
+                Enum.GetValues(typeof(KsiazkaCategory))
+        .Cast<KsiazkaCategory>().Select(e => new SelectListItem
+        {
+            Text = e.ToString(),
+            Value = ((int)e).ToString()
+        });
+
+            ViewBag.KsiazkaCategories = ksiazkaCategories;
+        }
+
+
+        public IActionResult Index()
+        {
+            var allKsiazki = _context.Ksiazki
+                .Include(n => n.Biblioteki)
+                .Include(n => n.Wydawnictwa)
+                .OrderBy(n => n.NameKs).ToList();
             return View(allKsiazki);
+        }
+        //Get: Wydawnictwa/Create
+        public IActionResult Create()
+        {
+            PopulateWydawnictwoList();
+            PopulateWydawnictwoList2();
+            PopulateWydawnictwoList3();
+            return View();
+        }
+
+        //Get: Wydawnictwa/Create
+        [HttpPost]
+        public IActionResult Create(Ksiazka objKsiazka)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Ksiazki.Add(objKsiazka);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(objKsiazka);
         }
     }
 }

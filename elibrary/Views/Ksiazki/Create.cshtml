@@ -1,0 +1,93 @@
+﻿@model Ksiazka
+
+@{
+    ViewData["Title"] = "Dodaj nową książkę";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Dodaj nową książkę</h1>
+        </p>
+        <div class="row">
+            <div class="col-md offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group text-center">
+                        <img id="ProfilePicturePreview" />
+                    </div>
+                    <!-- Image Preview -->
+                    <div class="form-group mb-3">
+                        <label asp-for="ImageURL" class="conrol-label">Okładka Książki</label>
+                        <input asp-for="ImageURL" class="form-control" />
+                        <span asp-validation-for="ImageURL" class="text-danger"></span>
+                    </div>
+                    <!-- Image URL -->
+                    <div class="form-group mb-3">
+                        <label asp-for="NameKs" class="conrol-label">Tytuł książki</label>
+                        <input asp-for="NameKs" class="form-control" />
+                        <span asp-validation-for="NameKs" class="text-danger"></span>
+                    </div>
+                    <!-- Book Description -->
+                    <div class="form-group mb-3">
+                        <label asp-for="DescKs" class="conrol-label">Opis</label>
+                        <input asp-for="DescKs" class="form-control" />
+                        <span asp-validation-for="DescKs" class="text-danger"></span>
+                    </div>
+                    <!-- Publication Date -->
+                    <div class="form-group mb-3">
+                        <label asp-for="PublikacjaTime" class="conrol-label">Data Publikacji</label>
+                        <input asp-for="PublikacjaTime" class="form-control" />
+                        <span asp-validation-for="PublikacjaTime" class="text-danger"></span>
+                    </div>
+                    <!-- Category Dropdown -->
+                    <div class="form-group mb-3">
+                        <label asp-for="ksiazkaCategory" class="conrol-label">Kategoria</label>
+                        <select asp-for="ksiazkaCategory" asp-items="@ViewBag.KsiazkaCategories" class="form-select">
+                            <option disabled selected>---wybierz kategorię---</option>
+                        </select>
+                        <span asp-validation-for="ksiazkaCategory" class="text-danger"></span>
+                    </div>
+                    <!-- Publisher Dropdown -->
+                    <div class="form-group mb-3">
+                        <label asp-for="Wydawnictwa" class="conrol-label">Wydawnictwo</label>
+                        <select asp-for="Id" asp-items="@ViewBag.Wydawnictwa" class="form-select">
+                            <option disabled selected>---wybierz wydawnictwo---</option>
+                            </select>
+                        <span asp-validation-for="Wydawnictwa.NameWyd" class="text-danger"></span>
+                    </div>
+                    <!-- Library Dropdown -->
+                    <div class="form-group mb-3">
+                        <label asp-for="Biblioteki" class="conrol-label">Biblioteka</label>
+                        <select asp-for="Id" asp-items="@ViewBag.Biblioteki" class="form-select">
+                            <option disabled selected>---wybierz bibliotekę---</option>
+                        </select>
+                        <span asp-validation-for="Biblioteki.NameBib" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            var profilePictureURL = $("#ImageURL").val(); // Pobranie wartości poprawnie
+            if (profilePictureURL) {
+                output.src = profilePictureURL;
+            }
+        });
+
+        $("#ImageURL").on("input", function () { // Użycie "input" zamiast "change" dla lepszej reakcji
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        });
+    </script>
+}

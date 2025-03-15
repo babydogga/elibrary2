@@ -1,4 +1,5 @@
 ﻿using elibrary.Data.Enums;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,14 +16,17 @@ namespace elibrary.Models
         public KsiazkaCategory ksiazkaCategory { get; set; }
 
         //relacje
-       
-        public List<Autor_Ksiazka> Autor_Ksiazki { get; set; } 
+        public List<Autor_Ksiazka> Autor_Ksiazki { get; set; }
         //wydawnictwo
+
+        [ValidateNever]
         public int WydId { get; set; }
         [ForeignKey("WydId")]
-        public Wydawnictwo Wydawnictwa { get; set; }    
+        
+        public Wydawnictwo Wydawnictwa { get; set; }
         //autor
 
+        [ValidateNever]
         public int BibId { get; set; }
         [ForeignKey("BibId")]
         public Biblioteka Biblioteki  { get; set; }    

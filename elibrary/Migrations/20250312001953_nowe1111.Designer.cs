@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using elibrary.Data;
 
@@ -11,9 +12,11 @@ using elibrary.Data;
 namespace elibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250312001953_nowe1111")]
+    partial class nowe1111
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +84,7 @@ namespace elibrary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AutId")
+                    b.Property<int>("AutorId")
                         .HasColumnType("int");
 
                     b.Property<int>("BibId")
@@ -110,7 +113,7 @@ namespace elibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AutId");
+                    b.HasIndex("AutorId");
 
                     b.HasIndex("BibId");
 
@@ -148,7 +151,7 @@ namespace elibrary.Migrations
                 {
                     b.HasOne("elibrary.Models.Autor", "Autorzy")
                         .WithMany("Ksiazki")
-                        .HasForeignKey("AutId")
+                        .HasForeignKey("AutorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

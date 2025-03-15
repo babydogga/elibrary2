@@ -40,5 +40,18 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            var profilePictureURL = $("#WydPictureURL").val(); // Pobranie wartości poprawnie
+            if (profilePictureURL) {
+                output.src = profilePictureURL;
+            }
+        });
+
+        $("#WydPictureURL").on("input", function () { // Użycie "input" zamiast "change" dla lepszej reakcji
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        });
+    </script>
 }

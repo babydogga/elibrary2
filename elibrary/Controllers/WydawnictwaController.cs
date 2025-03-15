@@ -147,5 +147,28 @@ namespace elibrary.Controllers
                 return View();
             }
         }
+        // GET: Wydawnictwa/Edit
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            try
+            {
+                var wydawnictwo = _context.Wydawnictwa.Find(id);
+                if (wydawnictwo != null)
+                {
+                    return View(wydawnictwo);
+                }
+                else
+                {
+                    TempData["errorMessage"] = $"Autor details not available for the Id: {id}";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

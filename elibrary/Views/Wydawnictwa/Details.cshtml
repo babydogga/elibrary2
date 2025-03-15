@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="text-center mb-3">
-                    <img id="ProfilePicturePreview" class="img-thumbnail" />
+                    <img id="ProfilePicturePreview" class="img-thumbnail uniform-size" />
                 </div>
                 <div class="form-group mb-3">
                     <label asp-for="WydPictureURL" class="control-label">Zdjęcie wydawnictwa</label>
@@ -52,3 +52,11 @@
         });
     </script>
 }
+
+<style>
+    .uniform-size {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+    }
+</style>

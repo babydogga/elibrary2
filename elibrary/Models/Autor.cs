@@ -16,7 +16,6 @@ namespace elibrary.Models
         public string FullName { get; set; }
         [Display(Name = "Biografia")]
         [Required(ErrorMessage = "Biografia jest wymagana")]
-        
         public string Bio { get; set; }
 
         //relacje

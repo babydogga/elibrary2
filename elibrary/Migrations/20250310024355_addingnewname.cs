@@ -5,7 +5,7 @@
 namespace elibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class addingnewname : Migration
+    public partial class Addingnewname : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

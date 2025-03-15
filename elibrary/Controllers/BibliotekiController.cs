@@ -38,6 +38,67 @@ namespace elibrary.Controllers
 
             return View();
         }
+        // GET: Autorzy/Delete
+
+        [HttpGet]
+        public IActionResult Delete(int Id)
+        {
+            try
+            {
+                var biblioteka = _context.Biblioteki.Find(Id);
+                if (biblioteka != null)
+                {
+                    var bibliotekaView = new Biblioteka()
+                    {
+                        Id = biblioteka.Id,
+                        LogoBib = biblioteka.LogoBib,
+                        NameBib = biblioteka.NameBib,
+                        DescBib = biblioteka.DescBib
+
+                    };
+                    return View(bibliotekaView);
+                }
+                else
+                {
+                    TempData["errorMessage"] = $"Autor details not available for the Id: {Id}";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+        // POST: Autorzy/Delete
+        [HttpPost]
+
+        public IActionResult Delete(Biblioteka model)
+        {
+            try
+
+            {
+                var biblioteka = _context.Biblioteki.Find(model.Id);
+                if (biblioteka != null)
+                {
+                    _context.Biblioteki.Remove(biblioteka);
+                    _context.SaveChanges();
+                    TempData["successMessage"] = "Autor został usunięty!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["errorMessage"] = $"Autor details not available for the Id: {model.Id}";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+
+        }
 
     }
 }

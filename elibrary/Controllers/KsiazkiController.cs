@@ -61,7 +61,7 @@ namespace elibrary.Controllers
                 .OrderBy(n => n.NameKs).ToList();
             return View(allKsiazki);
         }
-        //Get: Wydawnictwa/Create
+        //GET: Ksiazki/Create
         public IActionResult Create()
         {
             PopulateWydawnictwoList();
@@ -70,7 +70,7 @@ namespace elibrary.Controllers
             return View();
         }
 
-        //Get: Wydawnictwa/Create
+        //POST: Ksiazki/Create
         [HttpPost]
         public IActionResult Create(Ksiazka objKsiazka)
         {

@@ -122,39 +122,49 @@
 ## Struktura projektu
 
 ```
-e-biblioteka/
-|
-├── e-biblioteka.sln
-├── README.md
-├── appsettings.json
-├── Program.cs
-├── Controllers/
-│   ├── BooksController.cs
-│   ├── AuthorsController.cs
-│   └── PublishersController.cs
-├── Models/
-│   ├── Book.cs
-│   ├── Author.cs
-│   └── Publisher.cs
-├── Views/
-│   ├── Books/
-│   │   ├── Index.cshtml
-│   │   ├── Create.cshtml
-│   │   ├── Details.cshtml
-│   │   └── Delete.cshtml
-│   ├── Authors/
-│   │   ├── Index.cshtml
-│   │   ├── Create.cshtml
-│   │   ├── Details.cshtml
-│   │   └── Delete.cshtml
-│   └── Publishers/
-│       ├── Index.cshtml
-│       ├── Create.cshtml
-│       ├── Details.cshtml
-│       └── Delete.cshtml
-└── Data/
-    ├── ApplicationDbContext.cs
-    └── Migrations/
+elibrary2/
+│
+├── docs/
+│   ├── index.md
+│   ├── installation.md
+│   ├── configuration.md
+│   ├── usage.md
+│   ├── structure.md
+│   ├── contribution.md
+│   └── license.md
+│
+├── src/
+│   ├── Program.cs
+│   ├── Startup.cs
+│   ├── Models/
+│   │   ├── Book.cs
+│   │   ├── Author.cs
+│   │   └── Publisher.cs
+│   ├── Controllers/
+│   │   ├── BooksController.cs
+│   │   ├── AuthorsController.cs
+│   │   └── PublishersController.cs
+│   └── Views/
+│       ├── Books/
+│       │   ├── Index.cshtml
+│       │   ├── Details.cshtml
+│       │   ├── Create.cshtml
+│       │   └── Edit.cshtml
+│       ├── Authors/
+│       │   ├── Index.cshtml
+│       │   ├── Details.cshtml
+│       │   ├── Create.cshtml
+│       │   └── Edit.cshtml
+│       └── Publishers/
+│           ├── Index.cshtml
+│           ├── Details.cshtml
+│           ├── Create.cshtml
+│           └── Edit.cshtml
+│
+├── .gitattributes
+├── .gitignore
+├── elibrary.sln
+└── README.md
 ```
 
 ## Kontrybucja

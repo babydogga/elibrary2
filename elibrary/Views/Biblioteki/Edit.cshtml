@@ -1,44 +1,70 @@
 ﻿@model elibrary.Models.Biblioteka
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Biblioteka";
 }
 
-<h1>Edit</h1>
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Edit Biblioteka</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
 
-<h4>Biblioteka</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="LogoBib" class="control-label"></label>
-                <input asp-for="LogoBib" class="form-control" />
-                <span asp-validation-for="LogoBib" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NameBib" class="control-label"></label>
-                <input asp-for="NameBib" class="form-control" />
-                <span asp-validation-for="NameBib" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescBib" class="control-label"></label>
-                <input asp-for="DescBib" class="form-control" />
-                <span asp-validation-for="DescBib" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <!-- Logo Preview -->
+                <div class="text-center mb-3">
+                    <img id="LogoPreview" class="img-thumbnail" style="max-width: 200px; height: auto;" alt="Logo Preview" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LogoBib" class="form-label">Library Logo URL</label>
+                    <input asp-for="LogoBib" class="form-control" />
+                    <span asp-validation-for="LogoBib" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="NameBib" class="form-label">Library Name</label>
+                    <input asp-for="NameBib" class="form-control" />
+                    <span asp-validation-for="NameBib" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DescBib" class="form-label">Library Description</label>
+                    <textarea asp-for="DescBib" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="DescBib" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('LogoPreview');
+            var logoURL = $("#LogoBib").val();
+            if (logoURL) {
+                output.src = logoURL;
+            }
+        });
+
+        $("#LogoBib").on("input", function () {
+            var output = document.getElementById('LogoPreview');
+            output.src = $(this).val();
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

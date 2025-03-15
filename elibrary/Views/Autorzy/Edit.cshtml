@@ -1,44 +1,70 @@
 ﻿@model elibrary.Models.Autor
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Autor";
 }
 
-<h1>Edit</h1>
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Edit Autor</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
 
-<h4>Autor</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="ProfilePictureURL" class="control-label"></label>
-                <input asp-for="ProfilePictureURL" class="form-control" />
-                <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FullName" class="control-label"></label>
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bio" class="control-label"></label>
-                <input asp-for="Bio" class="form-control" />
-                <span asp-validation-for="Bio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <!-- Profile Picture Preview -->
+                <div class="text-center mb-3">
+                    <img id="ProfilePicturePreview" class="img-thumbnail rounded-circle" style="max-width: 150px; height: 150px;" alt="Profile Picture Preview" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ProfilePictureURL" class="form-label">Profile Picture URL</label>
+                    <input asp-for="ProfilePictureURL" class="form-control" />
+                    <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FullName" class="form-label">Full Name</label>
+                    <input asp-for="FullName" class="form-control" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Bio" class="form-label">Biography</label>
+                    <textarea asp-for="Bio" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Bio" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            var profilePictureURL = $("#ProfilePictureURL").val();
+            if (profilePictureURL) {
+                output.src = profilePictureURL;
+            }
+        });
+
+        $("#ProfilePictureURL").on("input", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        });
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

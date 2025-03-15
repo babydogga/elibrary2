@@ -13,7 +13,7 @@ namespace elibrary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20250310024355_addingnewname")]
-    partial class addingnewname
+    partial class Addingnewname
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

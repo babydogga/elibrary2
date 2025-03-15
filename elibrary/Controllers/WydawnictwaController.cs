@@ -39,5 +39,67 @@ namespace elibrary.Controllers
             return View();
         }
 
+        // GET: Autorzy/Delete
+
+        [HttpGet]
+        public IActionResult Delete(int Id)
+        {
+            try
+            {
+                var wydawnictwo = _context.Wydawnictwa.Find(Id);
+                if (wydawnictwo != null)
+                {
+                    var wydawnictwoView = new Wydawnictwo()
+                    {
+                        Id = wydawnictwo.Id,
+                        WydPictureURL = wydawnictwo.WydPictureURL,
+                        NameWyd = wydawnictwo.NameWyd,
+                        DescWyd = wydawnictwo.DescWyd
+
+                    };
+                    return View(wydawnictwoView);
+                }
+                else
+                {
+                    TempData["errorMessage"] = $"Autor details not available for the Id: {Id}";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+        // POST: Autorzy/Delete
+        [HttpPost]
+
+        public IActionResult Delete(Wydawnictwo model)
+        {
+            try
+
+            {
+                var wydawnictwo = _context.Wydawnictwa.Find(model.Id);
+                if (wydawnictwo != null)
+                {
+                    _context.Wydawnictwa.Remove(wydawnictwo);
+                    _context.SaveChanges();
+                    TempData["successMessage"] = "Autor został usunięty!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["errorMessage"] = $"Autor details not available for the Id: {model.Id}";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+
+        }
+
     }
 }

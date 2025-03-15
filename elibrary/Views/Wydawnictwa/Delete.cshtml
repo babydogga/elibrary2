@@ -1,7 +1,7 @@
-﻿@model Autor
+﻿@model Wydawnictwo
 
 @{
-    ViewData["Title"] = "Usuń autora";
+    ViewData["Title"] = "Usuń wydawnictwo";
     var errorMessage = TempData["errorMessage"]?.ToString();
 }
 <h3>@ViewData["Title"]</h3>
@@ -17,21 +17,21 @@
     <div class="row text">
         <div class="col-md-8 offset-2">
             <p>
-                <h1>Usuń autora</h1>
+                <h1>Usuń wydawnictwo</h1>
             </p>
             <div class="row">
                 <div class="col-md offset-2">
                     <div class="form-group mb-3">
-                        <label asp-for="ProfilePictureURL" class="conrol-label"></label>
-                        <input asp-for="ProfilePictureURL" class="form-control" readonly />
+                        <label asp-for="WydPictureURL" class="conrol-label"></label>
+                        <input asp-for="WydPictureURL" class="form-control" readonly />
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="FullName" class="conrol-label"></label>
-                        <input asp-for="FullName" class="form-control" readonly />
+                        <label asp-for="NameWyd" class="conrol-label"></label>
+                        <input asp-for="NameWyd" class="form-control" readonly />
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="Bio" class="conrol-label"></label>
-                        <input asp-for="Bio" class="form-control" readonly />
+                        <label asp-for="DescWyd" class="conrol-label"></label>
+                        <input asp-for="DescWyd" class="form-control" readonly />
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-danger">Delete</button>

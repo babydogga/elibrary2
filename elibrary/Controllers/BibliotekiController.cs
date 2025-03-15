@@ -38,7 +38,20 @@ namespace elibrary.Controllers
 
             return View();
         }
-        // GET: Autorzy/Delete
+
+        // GET: Biblioteki/Details
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var biblioteka = _context.Biblioteki.FirstOrDefault(a => a.Id == id);
+            if (biblioteka == null)
+            {
+                return NotFound();
+            }
+            return View(biblioteka);
+        }
+
+        // GET: Biblioteki/Delete
 
         [HttpGet]
         public IActionResult Delete(int Id)
@@ -70,7 +83,7 @@ namespace elibrary.Controllers
                 return RedirectToAction("Index");
             }
         }
-        // POST: Autorzy/Delete
+        // POST: Biblioteki/Delete
         [HttpPost]
 
         public IActionResult Delete(Biblioteka model)

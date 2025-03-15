@@ -102,7 +102,6 @@ namespace elibrary.Controllers
             }
         }
 
-
         // GET: Autorzy/Edit
         [HttpGet]
         public IActionResult Edit(int id)

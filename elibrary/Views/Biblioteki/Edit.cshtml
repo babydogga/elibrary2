@@ -1,0 +1,44 @@
+﻿@model elibrary.Models.Biblioteka
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Biblioteka</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="LogoBib" class="control-label"></label>
+                <input asp-for="LogoBib" class="form-control" />
+                <span asp-validation-for="LogoBib" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameBib" class="control-label"></label>
+                <input asp-for="NameBib" class="form-control" />
+                <span asp-validation-for="NameBib" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescBib" class="control-label"></label>
+                <input asp-for="DescBib" class="form-control" />
+                <span asp-validation-for="DescBib" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -112,6 +112,29 @@ namespace elibrary.Controllers
             }
 
         }
+        // GET: Biblioteki/Edit
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var biblioteka = _context.Biblioteki.FirstOrDefault(a => a.Id == id);
+            if (biblioteka == null)
+            {
+                return NotFound();
+            }
+            return View(biblioteka);
+        }
 
+        // POST: Biblioteki/Edit
+        [HttpPost]
+        public IActionResult Edit(Biblioteka objBiblioteka)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Biblioteki.Update(objBiblioteka);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

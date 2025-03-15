@@ -81,6 +81,11 @@ namespace elibrary.Controllers
                 return RedirectToAction("Index");
             }
 
+            // Repopulate the dropdown lists in case of validation error
+            PopulateWydawnictwoList();
+            PopulateWydawnictwoList2();
+            PopulateWydawnictwoList3();
+
             return View(objKsiazka);
         }
     }

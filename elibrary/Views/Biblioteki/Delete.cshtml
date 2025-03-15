@@ -13,7 +13,7 @@
         <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-<form action="Delete" method="post" autocomplete="off">
+<form asp-action="Delete" method="post" autocomplete="off">
     <div class="row text">
         <div class="col-md-8 offset-2">
             <p>
@@ -22,17 +22,18 @@
             <div class="row">
                 <div class="col-md offset-2">
                     <div class="form-group mb-3">
-                        <label asp-for="LogoBib" class="conrol-label"></label>
+                        <label asp-for="LogoBib" class="control-label"></label>
                         <input asp-for="LogoBib" class="form-control" readonly />
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="NameBib" class="conrol-label"></label>
+                        <label asp-for="NameBib" class="control-label"></label>
                         <input asp-for="NameBib" class="form-control" readonly />
                     </div>
                     <div class="form-group mb-3">
-                        <label asp-for="DescBib" class="conrol-label"></label>
+                        <label asp-for="DescBib" class="control-label"></label>
                         <input asp-for="DescBib" class="form-control" readonly />
                     </div>
+                    <input type="hidden" asp-for="Id" />
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-danger">Delete</button>
                         <a class="btn btn-outline-secondary" asp-action="Index">Anuluj</a>
@@ -42,5 +43,3 @@
         </div>
     </div>
 </form>
-
-

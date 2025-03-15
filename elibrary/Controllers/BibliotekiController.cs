@@ -85,33 +85,32 @@ namespace elibrary.Controllers
         }
         // POST: Biblioteki/Delete
         [HttpPost]
-
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(Biblioteka model)
         {
             try
-
             {
-                var biblioteka = _context.Biblioteki.Find(model.Id);
+                var biblioteka = _context.Biblioteki.FirstOrDefault(x => x.Id == model.Id);
                 if (biblioteka != null)
                 {
                     _context.Biblioteki.Remove(biblioteka);
                     _context.SaveChanges();
-                    TempData["successMessage"] = "Autor został usunięty!";
+                    TempData["successMessage"] = "Biblioteka została usunięta!";
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    TempData["errorMessage"] = $"Autor details not available for the Id: {model.Id}";
+                    TempData["errorMessage"] = $"Biblioteka details not available for the Id: {model.Id}";
                     return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
-                return View();
+                return View(model);
             }
-
         }
+
         // GET: Biblioteki/Edit
         [HttpGet]
         public IActionResult Edit(int id)

@@ -9,18 +9,17 @@ namespace elibrary.Models
         public int Id { get; set; }
         [Display(Name = "Zdjęcie profilowe")]
         [Required(ErrorMessage = "Zdjecie profilowe jest wymagane")]
-        public string ProfilePictureURL { get; set; }
+        public string ProfilePictureURL { get; set; } = string.Empty;
         [Display(Name = "Imię i nazwisko")]
         [Required(ErrorMessage = "Pełne imię jest wymagane")]
         [StringLength(255, MinimumLength = 3, ErrorMessage = "Imię i nazwisko powinno zawierać od 3 do 255 znaków")]
-        public string FullName { get; set; }
+        public string FullName { get; set; } = string.Empty;
         [Display(Name = "Biografia")]
         [Required(ErrorMessage = "Biografia jest wymagana")]
-        public string Bio { get; set; }
+        public string Bio { get; set; } = string.Empty;
 
         //relacje
         [ValidateNever]
-        public List<Autor_Ksiazka> Autor_Ksiazki { get; set; }
+        public List<Autor_Ksiazka> Autor_Ksiazki { get; set; } = new List<Autor_Ksiazka>();
     }
 }
-

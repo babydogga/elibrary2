@@ -46,8 +46,9 @@
    ```bash
    git clone https://github.com/babydogga/elibrary2.git
    cd elibrary2
+   ```
 
-   2. **Przygotowanie środowiska**:
+2. **Przygotowanie środowiska**:
 
    - Upewnij się, że masz zainstalowany .NET 6 SDK.
    - Zainstaluj SQL Server lub skonfiguruj inną kompatybilną bazę danych SQL.

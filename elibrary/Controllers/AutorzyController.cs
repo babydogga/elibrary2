@@ -55,42 +55,28 @@ namespace elibrary.Controllers
         }
 
         // GET: Autorzy/Delete
-
         [HttpGet]
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
-            try
+            var autor = _context.Autorzy.Find(id);
+            if (autor == null)
             {
-                var autor = _context.Autorzy.Find(Id);
-                if (autor != null)
-                {
-                    var autorView = new Autor()
-                    {
-                        Id = autor.Id,
-                        ProfilePictureURL = autor.ProfilePictureURL,
-                        FullName = autor.FullName,
-                        Bio = autor.Bio
+                return NotFound();
+            }
 
-                    };
-                    return View(autorView);
-                }
-                else
-                {
-                    TempData["errorMessage"] = $"Autor details not available for the Id: {Id}";
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (Exception ex)
+            var autorView = new Autor()
             {
-                TempData["errorMessage"] = ex.Message;
-                return RedirectToAction("Index");
-            }
+                Id = autor.Id,
+                ProfilePictureURL = autor.ProfilePictureURL,
+                FullName = autor.FullName,
+                Bio = autor.Bio
+            };
+            return View(autorView);
         }
-
-       
 
         // POST: Autorzy/Delete
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(Autor model)
         {
             try
@@ -112,8 +98,33 @@ namespace elibrary.Controllers
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
-                return View();
+                return View(model);
             }
+        }
+
+        // GET: Autorzy/Edit
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var autor = _context.Autorzy.FirstOrDefault(a => a.Id == id);
+            if (autor == null)
+            {
+                return NotFound();
+            }
+            return View(autor);
+        }
+
+        // POST: Autorzy/Edit
+        [HttpPost]
+        public IActionResult Edit(Autor objAutor)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Autorzy.Update(objAutor);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }

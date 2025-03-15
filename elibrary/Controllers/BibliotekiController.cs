@@ -38,7 +38,20 @@ namespace elibrary.Controllers
 
             return View();
         }
-        // GET: Autorzy/Delete
+
+        // GET: Biblioteki/Details
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var biblioteka = _context.Biblioteki.FirstOrDefault(a => a.Id == id);
+            if (biblioteka == null)
+            {
+                return NotFound();
+            }
+            return View(biblioteka);
+        }
+
+        // GET: Biblioteki/Delete
 
         [HttpGet]
         public IActionResult Delete(int Id)
@@ -70,35 +83,57 @@ namespace elibrary.Controllers
                 return RedirectToAction("Index");
             }
         }
-        // POST: Autorzy/Delete
+        // POST: Biblioteki/Delete
         [HttpPost]
-
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(Biblioteka model)
         {
             try
-
             {
-                var biblioteka = _context.Biblioteki.Find(model.Id);
+                var biblioteka = _context.Biblioteki.FirstOrDefault(x => x.Id == model.Id);
                 if (biblioteka != null)
                 {
                     _context.Biblioteki.Remove(biblioteka);
                     _context.SaveChanges();
-                    TempData["successMessage"] = "Autor został usunięty!";
+                    TempData["successMessage"] = "Biblioteka została usunięta!";
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    TempData["errorMessage"] = $"Autor details not available for the Id: {model.Id}";
+                    TempData["errorMessage"] = $"Biblioteka details not available for the Id: {model.Id}";
                     return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
-                return View();
+                return View(model);
             }
-
         }
 
+        // GET: Biblioteki/Edit
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var biblioteka = _context.Biblioteki.FirstOrDefault(a => a.Id == id);
+            if (biblioteka == null)
+            {
+                return NotFound();
+            }
+            return View(biblioteka);
+        }
+
+        // POST: Biblioteki/Edit
+        [HttpPost]
+        public IActionResult Edit(Biblioteka objBiblioteka)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Biblioteki.Update(objBiblioteka);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

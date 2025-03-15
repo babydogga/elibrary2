@@ -61,7 +61,7 @@ namespace elibrary.Controllers
                 .OrderBy(n => n.NameKs).ToList();
             return View(allKsiazki);
         }
-        //Get: Wydawnictwa/Create
+        //GET: Ksiazki/Create
         public IActionResult Create()
         {
             PopulateWydawnictwoList();
@@ -70,16 +70,22 @@ namespace elibrary.Controllers
             return View();
         }
 
-        //Get: Wydawnictwa/Create
+        //POST: Ksiazki/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Ksiazka objKsiazka)
         {
             if (ModelState.IsValid)
             {
                 _context.Ksiazki.Add(objKsiazka);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
+
+            // Repopulate the dropdown lists in case of validation error
+            PopulateWydawnictwoList();
+            PopulateWydawnictwoList2();
+            PopulateWydawnictwoList3();
 
             return View(objKsiazka);
         }

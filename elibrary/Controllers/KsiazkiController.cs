@@ -70,7 +70,7 @@ namespace elibrary.Controllers
             return View();
         }
 
-        //POST: Ksiazki/Create
+        // POST: Ksiazki/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Ksiazka objKsiazka)
@@ -79,7 +79,7 @@ namespace elibrary.Controllers
             {
                 _context.Ksiazki.Add(objKsiazka);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
 
             // Repopulate the dropdown lists in case of validation error

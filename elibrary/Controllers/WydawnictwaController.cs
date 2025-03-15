@@ -114,6 +114,38 @@ namespace elibrary.Controllers
             }
 
         }
-
+        // POST: Wydawnictwa/Edit
+        [HttpPost]
+        public IActionResult Edit(Wydawnictwo model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var wydawnictwo = _context.Wydawnictwa.Find(model.Id);
+                    if (wydawnictwo != null)
+                    {
+                        wydawnictwo.WydPictureURL = model.WydPictureURL;
+                        wydawnictwo.NameWyd = model.NameWyd;
+                        wydawnictwo.DescWyd = model.DescWyd;
+                        _context.Wydawnictwa.Update(wydawnictwo);
+                        _context.SaveChanges();
+                        TempData["successMessage"] = "Autor został zaktualizowany!";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["errorMessage"] = $"Autor details not available for the Id: {model.Id}";
+                        return RedirectToAction("Index");
+                    }
+                }
+                return View();
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+        }
     }
 }

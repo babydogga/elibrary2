@@ -39,7 +39,21 @@ namespace elibrary.Controllers
             return View();
         }
 
-        // GET: Autorzy/Delete
+        // GET: Wydawnictwa/Details
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var wydawnictwo = _context.Wydawnictwa.FirstOrDefault(a => a.Id == id);
+            if (wydawnictwo == null)
+            {
+                return NotFound();
+            }
+            return View(wydawnictwo);
+        }
+
+
+
+        // GET: Wydawnictwa/Delete
 
         [HttpGet]
         public IActionResult Delete(int Id)
@@ -71,7 +85,7 @@ namespace elibrary.Controllers
                 return RedirectToAction("Index");
             }
         }
-        // POST: Autorzy/Delete
+        // POST: Wydawnictwa/Delete
         [HttpPost]
 
         public IActionResult Delete(Wydawnictwo model)

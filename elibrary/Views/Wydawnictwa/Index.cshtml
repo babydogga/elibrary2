@@ -35,7 +35,7 @@
                         <td class="align-middle">
                             <div class="d-flex gap-2">
                                 <a class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
-                                <a class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> Details</a>
+                                <a asp-controller="Wydawnictwa" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm"><i class="bi bi-eye"></i> Details</a>
                                 <a class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Delete</a>
                             </div>
                         </td>
@@ -50,5 +50,5 @@
 </div>
 <div style="position: fixed; right: 25px; bottom: 25px;" class="text-white">
     <a asp-controller="Wydawnictwa" asp-action="Create" class="btn btn-success">
-        <i class="bi bi-plus-circle"></i>zcxzcxzcxzc Add New</a>
+        <i class="bi bi-plus-circle"></i>Add New</a>
 </div>

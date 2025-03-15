@@ -42,6 +42,18 @@ namespace elibrary.Controllers
             return View();
         }
 
+        // GET: Autorzy/Details
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var autor = _context.Autorzy.FirstOrDefault(a => a.Id == id);
+            if (autor == null)
+            {
+                return NotFound();
+            }
+            return View(autor);
+        }
+
         // GET: Autorzy/Delete
 
         [HttpGet]
@@ -75,17 +87,7 @@ namespace elibrary.Controllers
             }
         }
 
-        // GET: Autorzy/Details
-        [HttpGet]
-        public IActionResult Details(int id)
-        {
-            var autor = _context.Autorzy.FirstOrDefault(a => a.Id == id);
-            if (autor == null)
-            {
-                return NotFound();
-            }
-            return View(autor);
-        }
+       
 
         // POST: Autorzy/Delete
         [HttpPost]

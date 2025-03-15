@@ -115,5 +115,17 @@ namespace elibrary.Controllers
                 return View();
             }
         }
+
+        // GET: Autorzy/Edit
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var autor = _context.Autorzy.FirstOrDefault(a => a.Id == id);
+            if (autor == null)
+            {
+                return NotFound();
+            }
+            return View(autor);
+        }
     }
 }

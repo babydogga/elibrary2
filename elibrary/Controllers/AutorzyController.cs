@@ -74,6 +74,19 @@ namespace elibrary.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        // GET: Autorzy/Details
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var autor = _context.Autorzy.FirstOrDefault(a => a.Id == id);
+            if (autor == null)
+            {
+                return NotFound();
+            }
+            return View(autor);
+        }
+
         // POST: Autorzy/Delete
         [HttpPost]
 

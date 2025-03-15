@@ -87,7 +87,7 @@ namespace elibrary.Controllers
             }
         }
 
-       
+
 
         // POST: Autorzy/Delete
         [HttpPost]
@@ -126,6 +126,19 @@ namespace elibrary.Controllers
                 return NotFound();
             }
             return View(autor);
+        }
+
+        // POST: Autorzy/Edit
+        [HttpPost]
+        public IActionResult Edit(Autor objAutor)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Autorzy.Update(objAutor);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }

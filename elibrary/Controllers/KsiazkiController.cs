@@ -77,6 +77,10 @@ namespace elibrary.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Ensure the foreign keys are set correctly
+                objKsiazka.Wydawnictwa = _context.Wydawnictwa.Find(objKsiazka.WydId);
+                objKsiazka.Biblioteki = _context.Biblioteki.Find(objKsiazka.BibId);
+
                 _context.Ksiazki.Add(objKsiazka);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -89,5 +93,6 @@ namespace elibrary.Controllers
 
             return View(objKsiazka);
         }
+
     }
 }

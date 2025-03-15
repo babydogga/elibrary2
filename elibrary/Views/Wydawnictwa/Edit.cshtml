@@ -1,55 +1,64 @@
 ﻿@model elibrary.Models.Wydawnictwo
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Wydawnictwo";
 }
 
-<h1>Edit</h1>
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Edit Wydawnictwo</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="Id" />
 
-<h4>Wydawnictwo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="WydPictureURL" class="control-label"></label>
-                <input asp-for="WydPictureURL" class="form-control" />
-                <span asp-validation-for="WydPictureURL" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NameWyd" class="control-label"></label>
-                <input asp-for="NameWyd" class="form-control" />
-                <span asp-validation-for="NameWyd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescWyd" class="control-label"></label>
-                <input asp-for="DescWyd" class="form-control" />
-                <span asp-validation-for="DescWyd" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <!-- Image Preview -->
+                <div class="text-center mb-3">
+                    <img id="ProfilePicturePreview" class="img-thumbnail" style="max-width: 200px; height: auto;" alt="Image Preview" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="WydPictureURL" class="form-label">Picture URL</label>
+                    <input asp-for="WydPictureURL" class="form-control" />
+                    <span asp-validation-for="WydPictureURL" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="NameWyd" class="form-label">Name</label>
+                    <input asp-for="NameWyd" class="form-control" />
+                    <span asp-validation-for="NameWyd" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DescWyd" class="form-label">Description</label>
+                    <textarea asp-for="DescWyd" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="DescWyd" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
             var output = document.getElementById('ProfilePicturePreview');
-            var profilePictureURL = $("#WydPictureURL").val(); // Pobranie wartości poprawnie
+            var profilePictureURL = $("#WydPictureURL").val();
             if (profilePictureURL) {
                 output.src = profilePictureURL;
             }
         });
 
-        $("#WydPictureURL").on("input", function () { // Użycie "input" zamiast "change" dla lepszej reakcji
+        $("#WydPictureURL").on("input", function () {
             var output = document.getElementById('ProfilePicturePreview');
             output.src = $(this).val();
         });

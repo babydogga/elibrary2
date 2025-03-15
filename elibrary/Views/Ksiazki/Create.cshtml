@@ -11,37 +11,38 @@
         </p>
         <div class="row">
             <div class="col-md offset-2">
-                <form asp-action="Create">
+                <form asp-action="Create" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group text-center">
                         <img id="ProfilePicturePreview" />
                     </div>
                     <!-- Image Preview -->
                     <div class="form-group mb-3">
-                        <label asp-for="ImageURL" class="conrol-label">Okładka Książki</label>
+                        <label asp-for="ImageURL" class="control-label">Okładka Książki</label>
                         <input asp-for="ImageURL" class="form-control" />
                         <span asp-validation-for="ImageURL" class="text-danger"></span>
                     </div>
                     <!-- Image URL -->
                     <div class="form-group mb-3">
-                        <label asp-for="NameKs" class="conrol-label">Tytuł książki</label>
+                        <label asp-for="NameKs" class="control-label">Tytuł książki</label>
                         <input asp-for="NameKs" class="form-control" />
                         <span asp-validation-for="NameKs" class="text-danger"></span>
                     </div>
                     <!-- Book Description -->
                     <div class="form-group mb-3">
-                        <label asp-for="DescKs" class="conrol-label">Opis</label>
+                        <label asp-for="DescKs" class="control-label">Opis</label>
                         <input asp-for="DescKs" class="form-control" />
                         <span asp-validation-for="DescKs" class="text-danger"></span>
                     </div>
                     <!-- Publication Date -->
                     <div class="form-group mb-3">
-                        <label asp-for="PublikacjaTime" class="conrol-label">Data Publikacji</label>
-                        <input asp-for="PublikacjaTime" class="form-control" type="date" />                        <span asp-validation-for="PublikacjaTime" class="text-danger"></span>
+                        <label asp-for="PublikacjaTime" class="control-label">Data Publikacji</label>
+                        <input asp-for="PublikacjaTime" class="form-control" type="date" />
+                        <span asp-validation-for="PublikacjaTime" class="text-danger"></span>
                     </div>
                     <!-- Category Dropdown -->
                     <div class="form-group mb-3">
-                        <label asp-for="ksiazkaCategory" class="conrol-label">Kategoria</label>
+                        <label asp-for="ksiazkaCategory" class="control-label">Kategoria</label>
                         <select asp-for="ksiazkaCategory" asp-items="@ViewBag.KsiazkaCategories" class="form-select">
                             <option disabled selected>---wybierz kategorię---</option>
                         </select>
@@ -49,24 +50,24 @@
                     </div>
                     <!-- Publisher Dropdown -->
                     <div class="form-group mb-3">
-                        <label asp-for="Wydawnictwa" class="conrol-label">Wydawnictwo</label>
-                        <select asp-for="Id" asp-items="@ViewBag.Wydawnictwa" class="form-select">
+                        <label asp-for="WydId" class="control-label">Wydawnictwo</label>
+                        <select asp-for="WydId" asp-items="@ViewBag.Wydawnictwa" class="form-select">
                             <option disabled selected>---wybierz wydawnictwo---</option>
-                            </select>
-                        <span asp-validation-for="Wydawnictwa.NameWyd" class="text-danger"></span>
+                        </select>
+                        <span asp-validation-for="WydId" class="text-danger"></span>
                     </div>
                     <!-- Library Dropdown -->
                     <div class="form-group mb-3">
-                        <label asp-for="Biblioteki" class="conrol-label">Biblioteka</label>
-                        <select asp-for="Id" asp-items="@ViewBag.Biblioteki" class="form-select">
+                        <label asp-for="BibId" class="control-label">Biblioteka</label>
+                        <select asp-for="BibId" asp-items="@ViewBag.Biblioteki" class="form-select">
                             <option disabled selected>---wybierz bibliotekę---</option>
                         </select>
-                        <span asp-validation-for="Biblioteki.NameBib" class="text-danger"></span>
+                        <span asp-validation-for="BibId" class="text-danger"></span>
                     </div>
 
                     <!-- Buttons -->
                     <div class="d-flex justify-content-between">
-                       <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" value="Create" class="btn btn-primary" />
                         <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
                     </div>
                 </form>

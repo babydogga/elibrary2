@@ -70,16 +70,20 @@ namespace elibrary.Controllers
             return View();
         }
 
-        //POST: Ksiazki/Create
+        // POST: Ksiazki/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Ksiazka objKsiazka)
         {
             if (ModelState.IsValid)
             {
+                // Ensure the foreign keys are set correctly
+                objKsiazka.Wydawnictwa = _context.Wydawnictwa.Find(objKsiazka.WydId);
+                objKsiazka.Biblioteki = _context.Biblioteki.Find(objKsiazka.BibId);
+
                 _context.Ksiazki.Add(objKsiazka);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
 
             // Repopulate the dropdown lists in case of validation error
@@ -89,5 +93,6 @@ namespace elibrary.Controllers
 
             return View(objKsiazka);
         }
+
     }
 }

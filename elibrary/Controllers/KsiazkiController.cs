@@ -72,13 +72,14 @@ namespace elibrary.Controllers
 
         //POST: Ksiazki/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Ksiazka objKsiazka)
         {
             if (ModelState.IsValid)
             {
                 _context.Ksiazki.Add(objKsiazka);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
             // Repopulate the dropdown lists in case of validation error

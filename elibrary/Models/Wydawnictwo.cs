@@ -7,11 +7,14 @@ namespace elibrary.Models
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "Profile Picture")]
+        [Display(Name = "Zdjęcie wydawnictwa")]
+        [Required(ErrorMessage = "Zdjęcie jest wymagane")]
         public string WydPictureURL { get; set; }
-        [Display(Name = "Full Name")]
+        [Display(Name = "Nazwa wydawnictwa")]
+        [Required(ErrorMessage = "Nazwa jest wymagana")]
         public string NameWyd { get; set; }
-        [Display(Name = "Biography")]
+        [Display(Name = "Notka o wydawnictwie")]
+        [Required(ErrorMessage = "Notka jest wymagana")]
         public string DescWyd { get; set; }
 
         //Relacje

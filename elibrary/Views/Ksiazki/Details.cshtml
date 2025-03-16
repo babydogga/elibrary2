@@ -1,60 +1,86 @@
 ﻿@model elibrary.Models.Ksiazka
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły książki";
+    var errorMessage = TempData["errorMessage"]?.ToString();
 }
 
-<h1>Details</h1>
+<h3>@ViewData["Title"]</h3>
+<hr />
 
-<div>
-    <h4>Ksiazka</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NameKs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NameKs)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescKs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescKs)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageURL)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PublikacjaTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PublikacjaTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ksiazkaCategory)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ksiazkaCategory)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Wydawnictwa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Wydawnictwa.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Biblioteki)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Biblioteki.Id)
-        </dd>
-    </dl>
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error! </strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Szczegóły książki</h4>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <img id="BookImagePreview" class="img-thumbnail uniform-size" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Tytuł książki</label>
+                    <input class="form-control" value="@Model.NameKs" readonly />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Opis książki</label>
+                    <textarea class="form-control" rows="5" readonly>@Model.DescKs</textarea>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Data publikacji</label>
+                    <input class="form-control" value="@Model.PublikacjaTime.ToString("yyyy-MM-dd")" readonly />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Kategoria</label>
+                    <input class="form-control" value="@Model.ksiazkaCategory" readonly />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Wydawnictwo</label>
+                    <input class="form-control" value="@Model.Wydawnictwa?.NameWyd" readonly />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Biblioteka</label>
+                    <input class="form-control" value="@Model.Biblioteki?.NameBib" readonly />
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary">Powrót</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('BookImagePreview');
+            var bookImageURL = "@Model.ImageURL";
+            if (bookImageURL) {
+                output.src = bookImageURL;
+            }
+        });
+    </script>
+}
+
+<style>
+    .uniform-size {
+        width: 300px;
+        height: 300px;
+        object-fit: contain;
+    }
+</style>

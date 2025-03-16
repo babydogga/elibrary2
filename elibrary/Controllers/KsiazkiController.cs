@@ -93,6 +93,22 @@ namespace elibrary.Controllers
 
             return View(objKsiazka);
         }
-
+        // GET: Ksiazki/Detalis/5
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var ksiazka = _context.Ksiazki
+                .Include(n => n.Biblioteki)
+                .Include(n => n.Wydawnictwa)
+                .FirstOrDefault(n => n.Id == id);
+            if (ksiazka == null)
+            {
+                return NotFound();
+            }
+            return View(ksiazka);
+        }
     }
 }

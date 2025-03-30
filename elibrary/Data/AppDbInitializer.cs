@@ -63,7 +63,7 @@ namespace elibrary.Data
                     {
                         new Autor()
                         {
-                            Id = 1,
+                            
                             FullName = "JRR Tolkien",
                             Bio = "To jest opis dla JRR Tolkiena",
                             ProfilePictureURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/J._R._R._Tolkien%2C_ca._1925.jpg/1024px-J._R._R._Tolkien%2C_ca._1925.jpg"
@@ -71,7 +71,7 @@ namespace elibrary.Data
 
                         new Autor()
                         {
-                            Id = 2, 
+                             
                             FullName = "CS Levis",
                             Bio = "To jest opis dla CS Levis",
                             ProfilePictureURL = "https://cdn.britannica.com/24/82724-050-A1F9D0B9/CS-Lewis.jpg"
@@ -79,7 +79,7 @@ namespace elibrary.Data
 
                         new Autor()
                         {
-                            Id = 3, 
+                            
                             FullName = "Marcin Najman",
                             Bio = "To jest opis dla Marcin Najman",
                             ProfilePictureURL = "https://upload.wikimedia.org/wikipedia/commons/0/03/Marcin_Najman_..._%2840313247093%29_%28cropped%29.jpg"
@@ -95,7 +95,7 @@ namespace elibrary.Data
                         {
                             new Wydawnictwo()
                             {
-                                Id = 1,
+                                
                                 NameWyd = "Wydawnictwo Uniwersytetu Jagiellonskiego",
                                 DescWyd = "To jest Wydawnictwo Uniwersytetu Jagiellonskiego",
                                 WydPictureURL = "https://a.allegroimg.com/original/1271ea/7818254f452490344fe22596a489"
@@ -103,7 +103,7 @@ namespace elibrary.Data
 
                             new Wydawnictwo()
                             {
-                                Id = 2,
+                                
                                 NameWyd = "Wydawnictwo UAM",
                                 DescWyd = "To jest Wydawnictwo UAM",
                                 WydPictureURL = "https://amu.edu.pl/__data/assets/image/0017/15803/wydawnictwo-naukowe-uam.PNG"
@@ -111,7 +111,7 @@ namespace elibrary.Data
 
                             new Wydawnictwo()
                             {
-                                Id = 3,
+                                
                                 NameWyd = "Wydawnictwo Krzak",
                                 DescWyd = "To jest Wydawnictwo Krzak",
                                 WydPictureURL = "https://pracownia52.pl/www/wp-content/uploads/2018/05/krzak-jarocin-001-mn.jpg"
@@ -128,36 +128,36 @@ namespace elibrary.Data
                         {
                             new Ksiazka()
                             {
-                                Id = 1,
+                                
                                 NameKs = "Silmarillion",
                                 DescKs = "Oto najnowasza ksiazka JRR Tolkiena, Silmarillion!",
                                 ImageURL = "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1610045590i/7332.jpg",
                                 PublikacjaTime = DateTime.Now.AddDays(-11),
-                                WydId = 1,
+                                WydId = 2,
                                 BibId = 1,
                                 ksiazkaCategory = KsiazkaCategory.Fabularna
                             },
 
                             new Ksiazka()
                             {
-                                Id = 2,
+                                
                                 NameKs = "Opowiesci z Narnii",
                                 DescKs = "Oto najnowasza ksiazka CS Levisa, Opowiesci z Narnii!",
                                 ImageURL = "https://upload.wikimedia.org/wikipedia/commons/4/43/Chronicles_narnia_lion_witch_logo.png",
                                 PublikacjaTime = DateTime.Now.AddDays(-11),
-                                WydId = 1,
+                                WydId = 2,
                                 BibId = 2,
                                 ksiazkaCategory = KsiazkaCategory.SciFi
                             },
 
                             new Ksiazka()
                             {
-                                Id = 3,
+                                
                                 NameKs = "Ojciec chrzestny polskich Freak Fightów",
                                 DescKs = "Oto najnowasza ksiazka Marcina Najmana, Ojciec chrzestny polskich Freak Fightów!",
                                 ImageURL = "https://skrypt.com.pl/wp-content/uploads/2024/01/1-1-24.jpg",
                                 PublikacjaTime = DateTime.Now.AddDays(-11),
-                                WydId = 1,
+                                WydId = 2,
                                 BibId = 3,
                                 ksiazkaCategory = KsiazkaCategory.Fantazy
                             }
@@ -182,7 +182,7 @@ namespace elibrary.Data
                             },
                             new Autor_Ksiazka()
                             {
-                                KsiazkaId = 1,
+                                KsiazkaId = 4,
                                 AutorId = 3,
                             },
 
